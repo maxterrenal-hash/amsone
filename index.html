@@ -1277,7 +1277,7 @@ function collectPayload() {
   const list = DRUG_LISTS[currentMode] || [];
   const f = list.find(x => x.value === payload.antimicrobial);
   payload.drugType = f ? (f.type === "restricted" ? "Restricted" : "Monitored") : "";
-
+  payload.status = "pending";
 const now = new Date();
 payload.timestamp = now.toLocaleString("en-PH", {
   timeZone: "Asia/Manila"
