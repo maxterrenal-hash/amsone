@@ -1268,16 +1268,10 @@ function collectPayload() {
   // Resident section (correct placement)
   payload.residentName = document.getElementById("residentName").value || "";
   payload.clinicalDept = document.getElementById("clinicalDept").value || "";
-// Get raw date from input
-let raw = document.getElementById("reqDate").value || "";
 
-// Normalize to Manila YYYY-MM-DD
-if (raw) {
-  const dt = new Date(raw + "T00:00:00+08:00");
-  payload.reqDate = dt.toISOString().split("T")[0];
-} else {
-  payload.reqDate = "";
-}
+// FIX: Do NOT convert to Date. Keep raw yyyy-mm-dd as literal string.
+payload.reqDate = document.getElementById("reqDate").value || "";
+
 
   // Service resident (restricted-only)
   payload.serviceResidentName = document.getElementById("serviceResidentName").value || "";
