@@ -34,27 +34,35 @@ header {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.85rem 1rem;      /* matches pharmacy/IDS */
   background: var(--osmak-green);
   color: #fff;
+  padding: 0.75rem 1rem;
+  /* no border radius, no margin */
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  margin: 0;                  /* remove negative margin */
-  border-radius: 0;           /* remove rounded bottom */
 }
+
 header img {
-  height: 48px;               /* same logo size */
+  height: 48px;
+  width: auto;
 }
+
+header .title-block {
+  display: flex;
+  flex-direction: column;
+}
+
 header .title-block h1 {
   margin: 0;
-  font-size: 1.05rem;         /* same as IDS/Pharmacy */
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
 }
-header .title-block small {
-  display: block;
+
+header .title-block span {
   font-size: 0.8rem;
-  opacity: 0.9;               /* exact match */
+  opacity: 0.9;
 }
+
 
 
     header img {
@@ -379,14 +387,17 @@ header .title-block small {
   </style>
 </head>
 <body>
+  <header>
+    <img src="https://maxterrenal-hash.github.io/justculture/osmak-logo.png" alt="Ospital ng Makati Logo" />
+    <div class="title-block">
+      <h1>OSPITAL NG MAKATI</h1>
+      <span>Antimicrobial Request System – Doctors Module</span>
+    </div>
+  </header>
+
   <div class="app">
-    <header>
-      <img src="https://maxterrenal-hash.github.io/justculture/osmak-logo.png" alt="Ospital ng Makati Logo" />
-<div class="title-block">
-  <h1>Ospital ng Makati</h1>
-  <small>Antimicrobial Request System – Doctors Module</small>
-</div>
-    </header>
+    <!-- everything else stays the same, starting from the toggle-row -->
+
 
     <div class="toggle-row" id="modeToggle">
       <button class="toggle-btn active" data-mode="adult">Adult</button>
