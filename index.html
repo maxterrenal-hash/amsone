@@ -847,7 +847,7 @@ function updateEgfr() {
 
   // Convert mmol/L → mg/dL
   if (!isNaN(scr) && scr > 0) {
-    scr = scr * 11.312;
+    scr = scr / 11.312;
   }
 
   const box = document.getElementById("egfrBox");
