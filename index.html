@@ -512,7 +512,7 @@ header .title-block span {
           <h2>Laboratory Data</h2>
           <div class="field-row">
             <div class="field">
-              <label>Serum Creatinine (mg/dL)</label>
+              <label>Serum Creatinine (mmol/L)</label>
               <input type="number" id="scr" min="0" step="0.01" />
             </div>
             <div class="field">
@@ -959,7 +959,8 @@ function hideUpdatingBadge() {
     function updateEgfr() {
       const age = parseFloat(document.getElementById("age").value);
       const sex = document.getElementById("sex").value;
-      const scr = parseFloat(document.getElementById("scr").value);
+      const scrMmol = parseFloat(document.getElementById("scr").value);
+      const scr = isNaN(scrMmol) ? NaN : scrMmol * 11.3;
       const height = parseFloat(document.getElementById("height").value);
       const box = document.getElementById("egfrBox");
 
@@ -1347,7 +1348,7 @@ if (f && f.type === "restricted") {
         <div class="summary-row"><span class="summary-label">Physician:</span> ${phys}</div>
         <div class="summary-row"><span class="summary-label">Diagnosis:</span> ${dx}</div>
         <hr />
-        <div class="summary-row"><span class="summary-label">Creatinine / eGFR:</span> Scr ${scr} mg/dL; ${egfr}</div>
+        <div class="summary-row"><span class="summary-label">Creatinine / eGFR:</span> Scr ${scrMmol} mmol/L (${scrMg} mg/dL); ${egfr}</div>
         <div class="summary-row"><span class="summary-label">SGPT:</span> ${sgpt}</div>
         <hr />
         <div class="summary-row"><span class="summary-label">Antimicrobial:</span> ${drug} <span class="pill">${drugType}</span></div>
@@ -1402,7 +1403,10 @@ function collectPayload() {
     ward: document.getElementById("ward").value || "",
     physician: document.getElementById("physician").value || "",
     diagnosis: document.getElementById("diagnosis").value || "",
-    scrMgDl: document.getElementById("scr").value || "",
+scrMgDl: (() => {
+  const v = parseFloat(document.getElementById("scr").value);
+  return isNaN(v) ? "" : (v * 11.3).toFixed(2);   // stored as mg/dL
+})(),
     sgpt: document.getElementById("sgpt").value || "",
     egfrText: document.getElementById("egfrBox").textContent || "",
     antimicrobial: document.getElementById("antimicrobialSelect").value || "",
