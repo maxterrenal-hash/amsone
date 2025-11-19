@@ -802,8 +802,6 @@
     serviceNameInput.value = "";
 
     if (!val) {
-      dosingSection.style.visibility = "hidden";
-      dosingSection.style.height = "40px"; /* ensures reserved space */
 
       monographBox.innerHTML = "<p>Select an antimicrobial.</p>";
       return;
@@ -815,12 +813,10 @@
         : PEDIATRIC_MONOGRAPHS[val] || ADULT_MONOGRAPHS[val];
 
     if (!mono) {
-      dosingSection.style.display = "none";
       monographBox.innerHTML = `<p><strong>${val}</strong>: No monograph found.</p>`;
       return;
     }
 
-    dosingSection.style.display = "block";
 
     let html = `<h3>${val} – ${currentMode === "adult" ? "Adult" : "Pediatric"} Monograph</h3>`;
     if (mono.spectrum) html += `<p><strong>Spectrum:</strong> ${mono.spectrum}</p>`;
