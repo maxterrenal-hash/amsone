@@ -101,6 +101,13 @@
       font-weight: 600;
     }
 
+    .monograph-card {
+      min-height: 260px; /* same as antimicrobial-card */
+      display: flex;
+      flex-direction: column;
+    }
+
+    
     .grid-two {
       display: grid;
       grid-template-columns: 1fr 1fr;   /* evenly split */
@@ -549,7 +556,7 @@
 <div>
 
   <!-- DRUG MONOGRAPH -->
-  <div class="card">
+  <div class="card" monograph-card">
     <h2>Drug Monograph</h2>
     <div id="monographBox" class="monograph">
       <p>Select an antimicrobial to view its monograph.</p>
