@@ -1061,20 +1061,26 @@ function collectPayload() {
     }
   });
 
-  // Organisms
-  document.querySelectorAll("#organismContainer .organism-block").forEach(block => {
-    const name = block.querySelector("input").value || "";
-    const pairs = [];
-    block.querySelectorAll(".dyn-row").forEach(r => {
-      const inputs = r.querySelectorAll("input,select");
-      if (inputs.length >= 2) {
-        const drug = inputs[0].value || "";
-        const res = inputs[1].value || "";
-        if (drug || res) pairs.push({ drug, result: res });
-      }
-    });
-    if (name || pairs.length) payload.organisms.push({ name, susceptibilities: pairs });
+// Organisms
+document.querySelectorAll("#organismContainer .organism-block").forEach(block => {
+  const name = block.querySelector("input").value || "";
+  const pairs = [];
+
+  // NEW: for each susceptibility row
+  block.querySelectorAll(".susc-row").forEach(r => {
+    const drug = r.querySelector("input")?.value || "";
+    const res  = r.querySelector("select")?.value || "";
+    if (drug || res) pairs.push({ drug, result: res });
   });
+
+  if (name || pairs.length) {
+    payload.organisms.push({
+      name,
+      susceptibilities: pairs
+    });
+  }
+});
+
 
   // Drug type
   const list = DRUG_LISTS[currentMode] || [];
