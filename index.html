@@ -29,6 +29,7 @@
     font-size: 0.78rem;   /* adjust smaller or larger */
     line-height: 1.2rem; /* tighten spacing */
     /* ↓↓↓ The important part ↓↓↓ */
+    flex: 1;
     overflow-y: auto;       /* scroll vertically when needed */
     padding-right: 6px;     /* avoids text touching scrollbar */
     }
@@ -100,7 +101,7 @@
     }
 
     .monograph-card {
-      min-height: 260px; /* same as antimicrobial-card */
+      height: 260px; /* same as antimicrobial-card */
       display: flex;
       flex-direction: column;
     }
@@ -554,7 +555,7 @@
 <div>
 
   <!-- DRUG MONOGRAPH -->
-  <div class="card" monograph-card">
+  <div class="card monograph-card">
     <h2>Drug Monograph</h2>
     <div id="monographBox" class="monograph">
       <p>Select an antimicrobial to view its monograph.</p>
