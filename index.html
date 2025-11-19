@@ -387,6 +387,14 @@ header .title-block span {
   </style>
 </head>
 <body>
+  <div id="updateBadge"
+     style="position:fixed; top:10px; right:10px; background:#fff3cd;
+            color:#8a6d3b; padding:4px 10px; font-size:0.75rem;
+            border-radius:4px; border:1px solid #f0e1a0;
+            display:none; z-index:500;">
+  Updating…
+</div>
+
   <header>
     <img src="https://maxterrenal-hash.github.io/justculture/osmak-logo.png" alt="Ospital ng Makati Logo" />
     <div class="title-block">
@@ -747,6 +755,17 @@ function buildDrugListFromMonographs() {
 
     let currentMode = "adult";
     let selectedIndication = "";
+    
+// ====== UPDATE BADGE ======
+function showUpdatingBadge() {
+  const b = document.getElementById("updateBadge");
+  if (b) b.style.display = "block";
+}
+
+function hideUpdatingBadge() {
+  const b = document.getElementById("updateBadge");
+  if (b) b.style.display = "none";
+}
 
     function init() {
       tryBuildDrugList();
@@ -1249,24 +1268,27 @@ if (f && f.type === "restricted") {
       `;
     }
 
-    async function submitForm() {
-      closeModal();
+async function submitForm() {
+  closeModal();
+  showUpdatingBadge();  // <<< ADD THIS
 
-      const payload = collectPayload();
+  const payload = collectPayload();
 
+  try {
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
 
-      try {
-        const res = await fetch(SCRIPT_URL, {
-          method: "POST",
-          body: JSON.stringify(payload)
-        });
         if (!res.ok) throw new Error("Network error");
         const data = await res.json().catch(() => ({}));
         console.log("Sheet response", data);
         alert("Request submitted successfully. For PDF, use your browser's Print > Save as PDF on this page or future printable view.");
+    hideUpdatingBadge();
       } catch (err) {
         console.error(err);
         alert("Failed to submit. Check console for details and verify your Apps Script URL.");
+    hideUpdatingBadge();
       }
     }
 
