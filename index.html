@@ -254,6 +254,21 @@
       color:var(--text-muted);
       font-size:0.8rem;
     }
+
+   .susc-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+   }
+
+   .susc-row {
+    display: grid;
+    grid-template-columns: 1fr 80px 40px;
+    gap: 0.4rem;
+    align-items: center;
+  }
+
+    
   </style>
 </head>
 
@@ -840,7 +855,7 @@
       <div class="field-row">
         <div class="field" style="flex:1 1 100%;">
           <label>Susceptibilities (Drug – S/I/R)</label>
-          <div class="dyn-row"></div>
+          <div class="susc-container"></div>
           <button type="button" class="icon-btn" data-role="add-susc">➕ Add Drug</button>
         </div>
       </div>
@@ -849,11 +864,11 @@
     block.querySelector(".organism-header button")
       .addEventListener("click", ()=>block.remove());
 
-    const dyn = block.querySelector(".dyn-row");
+    const dyn = block.querySelector(".susc-container");
     const addBtn = block.querySelector("[data-role='add-susc']");
     addBtn.addEventListener("click",()=>{
       const r = document.createElement("div");
-      r.className = "dyn-row";
+      r.className = "susc-row";
       r.innerHTML = `
         <input type="text" placeholder="Drug">
         <select>
@@ -863,7 +878,7 @@
         </select>
       `;
       dyn.appendChild(r);
-    });
+          });
 
     addBtn.click();
     container.appendChild(block);
