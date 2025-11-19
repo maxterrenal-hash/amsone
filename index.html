@@ -27,7 +27,11 @@
 
     #monographBox {
     font-size: 0.78rem;   /* adjust smaller or larger */
-    line-height: 1.25rem; /* tighten spacing */
+    line-height: 1.2rem; /* tighten spacing */
+    /* ↓↓↓ The important part ↓↓↓ */
+    max-height: 220px;      /* reduce this number to shrink further */
+    overflow-y: auto;       /* scroll vertically when needed */
+    padding-right: 6px;     /* avoids text touching scrollbar */
     }
 
     #monographBox h3 {
