@@ -50,6 +50,30 @@
       }
     }
     
+      /* DESKTOP GRID PLACEMENT (≥900px) */
+  @media (min-width: 900px) {
+    /* Lab spans both columns at the top */
+    .lab-card {
+      grid-column: 1 / 3;
+    }
+  
+    /* Left column cards */
+    .antimicrobial-card,
+    .indication-card,
+    .resident-card,
+    #serviceResidentCard {
+      grid-column: 1;
+    }
+  
+    /* Right column cards */
+    .monograph-card,
+    .prevabx-card,
+    .micro-card {
+      grid-column: 2;
+    }
+  }
+
+    
     .lab-card {
     grid-column: 1 / 3;   /* span both columns */
     }
@@ -462,7 +486,6 @@
       </div>
     </div>
 
-      <div>
         <!-- ANTIBIOTIC SELECTION -->
         <div class="card antimicrobial-card">
           <h2>Antimicrobial Selection</h2>
