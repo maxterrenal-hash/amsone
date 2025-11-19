@@ -586,34 +586,31 @@
 <div>
 
   <!-- DRUG MONOGRAPH -->
-  <div class="card monograph-card">
-    <h2>Drug Monograph</h2>
-    <div id="monographBox" class="monograph">
-      <p>Select an antimicrobial to view its monograph.</p>
+<div class="card monograph-card">
+  <h2>Drug Monograph</h2>
+  <div id="monographBox" class="monograph">
+    <p>Select an antimicrobial to view its monograph.</p>
+  </div>
+</div>
+
+<div class="card prevabx-card">
+  <h2>Previous / Current Antibiotics</h2>
+  <div id="prevAbxContainer"></div>
+  <button type="button" id="addPrevAbx" class="icon-btn">➕ Add Antibiotic</button>
+</div>
+
+<div class="card micro-card">
+  <h2>Microbiology Data</h2>
+  <div class="field-row">
+    <div class="field" style="flex:1 1 100%;">
+      <label>Specimen Type</label>
+      <input type="text" id="specimen" placeholder="Blood, Sputum, Urine, etc.">
     </div>
   </div>
+  <div id="organismContainer"></div>
+  <button type="button" class="icon-btn" id="addOrganism">➕ Add Organism</button>
+</div>
 
-  <!-- PREVIOUS ABX (MOVED HERE) -->
-  <div class="card prevabx-card">
-    <h2>Previous / Current Antibiotics</h2>
-    <div id="prevAbxContainer"></div>
-    <button type="button" id="addPrevAbx" class="icon-btn">➕ Add Antibiotic</button>
-  </div>
-
-  <!-- MICRO (MOVED HERE) -->
-  <div class="card micro-card">
-    <h2>Microbiology Data</h2>
-
-    <div class="field-row">
-      <div class="field" style="flex:1 1 100%;">
-        <label>Specimen Type</label>
-        <input type="text" id="specimen" placeholder="Blood, Sputum, Urine, etc.">
-      </div>
-    </div>
-
-    <div id="organismContainer"></div>
-    <button type="button" class="icon-btn" id="addOrganism">➕ Add Organism</button>
-  </div>
 
 </div>
 
