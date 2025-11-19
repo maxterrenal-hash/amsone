@@ -839,41 +839,41 @@ function buildDrugListFromMonographs() {
       sel.value = currentVal;
     }
 
-    function updateEgfr() {
-      const age = parseFloat(document.getElementById("age").value);
-      const sex = document.getElementById("sex").value;
-      const scr = parseFloat(document.getElementById("scr").value);
-      const height = parseFloat(document.getElementById("height").value);
+function updateEgfr() {
+  let age = parseFloat(document.getElementById("age").value);
+  let sex = document.getElementById("sex").value;
+  let scr = parseFloat(document.getElementById("scr").value);
+  let height = parseFloat(document.getElementById("height").value);
 
-      // Always convert mmol/L → mg/dL
-      if (!isNaN(scr) && scr > 0) {
-        scr = scr * 11.312;
-      }
-      
-      const box = document.getElementById("egfrBox");
+  // Convert mmol/L → mg/dL
+  if (!isNaN(scr) && scr > 0) {
+    scr = scr * 11.312;
+  }
 
-      if (isNaN(age) || !sex || isNaN(scr)) {
-        box.textContent = "—";
-        return;
-      }
+  const box = document.getElementById("egfrBox");
 
-      let egfr;
-      if (currentMode === "adult") {
-        egfr = calcCkdEpi2021(age, sex, scr);
-      } else {
-        if (!height) {
-          box.textContent = "Enter height to compute CKiD eGFR.";
-          return;
-        }
-        egfr = calcCkidHeightBased(height, scr);
-      }
+  if (isNaN(age) || !sex || isNaN(scr)) {
+    box.textContent = "—";
+    return;
+  }
 
-      if (!isFinite(egfr)) {
-        box.textContent = "—";
-      } else {
-        box.textContent = egfr.toFixed(1) + " mL/min/1.73m²";
-      }
+  let egfr;
+
+  if (currentMode === "adult") {
+    egfr = calcCkdEpi2021(age, sex, scr);
+  } else {
+    if (!height) {
+      box.textContent = "Enter height to compute CKiD eGFR.";
+      return;
     }
+    egfr = calcCkidHeightBased(height, scr);
+  }
+
+  box.textContent = isFinite(egfr)
+    ? egfr.toFixed(1) + " mL/min/1.73m²"
+    : "—";
+}
+
 
     // 2021 CKD-EPI creatinine-only equation (without race)
     function calcCkdEpi2021(age, sex, scr) {
