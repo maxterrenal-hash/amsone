@@ -995,74 +995,84 @@
   // ============================
   // PAYLOAD → SHEET
   // ============================
-  function collectPayload() {
-    const payload = {
-      mode: currentMode,
-      patientName: document.getElementById("patientName").value,
-      age: document.getElementById("age").value,
-      sex: document.getElementById("sex").value,
-      weight: document.getElementById("weight").value,
-      height: document.getElementById("height").value || "",
-      hospitalNumber: document.getElementById("hospitalNumber").value,
-      ward: document.getElementById("ward").value,
-      diagnosis: document.getElementById("diagnosis").value,
-      scr: document.getElementById("scr").value,
-      sgpt: document.getElementById("sgpt").value,
-      egfrText: document.getElementById("egfrBox").textContent,
+function collectPayload() {
+  const payload = {
+    mode: currentMode,
+    patientName: document.getElementById("patientName").value || "",
+    age: document.getElementById("age").value || "",
+    sex: document.getElementById("sex").value || "",
+    weightKg: document.getElementById("weight").value || "",
+    heightCm: currentMode === "pediatric" ? (document.getElementById("height").value || "") : "",
+    hospitalNumber: document.getElementById("hospitalNumber").value || "",
+    ward: document.getElementById("ward").value || "",
+    diagnosis: document.getElementById("diagnosis").value || "",
+    scrMgDl: document.getElementById("scr").value || "",
+    sgpt: document.getElementById("sgpt").value || "",
+    egfrText: document.getElementById("egfrBox").textContent || "",
 
-      antimicrobial: document.getElementById("antimicrobialSelect").value,
-      dose: document.getElementById("dose").value,
-      frequency: document.getElementById("frequency").value,
-      duration: document.getElementById("duration").value,
+    antimicrobial: document.getElementById("antimicrobialSelect").value || "",
+    dose: document.getElementById("dose").value || "",
+    frequency: document.getElementById("frequency").value || "",
+    duration: document.getElementById("duration").value || "",
 
-      indication: selectedIndication,
-      basisIndication: document.getElementById("basisIndication").value,   // ⭐ NEW for Column AG
+    indication: selectedIndication,
+    basisIndication: document.getElementById("basisIndication").value || "",
 
-      previousAntibiotics: [],
-      organisms: [],
+    specimen: document.getElementById("specimen").value || "",
+    previousAntibiotics: [],
+    organisms: [],
 
-      residentName: document.getElementById("residentName").value,
-      clinicalDept: document.getElementById("clinicalDept").value,
-      reqDate: document.getElementById("reqDate").value,
+    residentName: document.getElementById("residentName").value || "",
+    clinicalDept: document.getElementById("clinicalDept").value || "",
 
-      serviceResidentName: document.getElementById("serviceResidentName").value || "",
-      idSpecialist: document.getElementById("idsSelect").value || "",
+    // 🔥 KEEP RAW yyyy-mm-dd
+    reqDate: document.getElementById("reqDate").value || "",
 
-      drugType: document.getElementById("drugTypeBox").value,
-      status: "pending",
+    serviceResidentName: document.getElementById("serviceResidentName").value || "",
+    idSpecialist: document.getElementById("idsSelect").value || "",
 
-      timestamp: new Date().toLocaleString("en-PH",{ timeZone:"Asia/Manila" })
-    };
+    status: "pending"
+  };
 
-    // Previous antibiotics
-    document.querySelectorAll("#prevAbxContainer .dyn-row").forEach(row=>{
-      const i = row.querySelectorAll("input");
-      const d=i[0].value.trim(), f=i[1].value.trim(), du=i[2].value.trim();
-      if (d || f || du)
-        payload.previousAntibiotics.push({drug:d,frequency:f,duration:du});
+  // Previous antibiotics
+  document.querySelectorAll("#prevAbxContainer .dyn-row").forEach(row => {
+    const i = row.querySelectorAll("input");
+    if (i.length >= 3) {
+      const d = i[0].value.trim();
+      const f = i[1].value.trim();
+      const du = i[2].value.trim();
+      if (d || f || du) {
+        payload.previousAntibiotics.push({ drug: d, frequency: f, duration: du });
+      }
+    }
+  });
+
+  // Organisms
+  document.querySelectorAll("#organismContainer .organism-block").forEach(block => {
+    const name = block.querySelector("input").value || "";
+    const pairs = [];
+    block.querySelectorAll(".dyn-row").forEach(r => {
+      const inputs = r.querySelectorAll("input,select");
+      if (inputs.length >= 2) {
+        const drug = inputs[0].value || "";
+        const res = inputs[1].value || "";
+        if (drug || res) pairs.push({ drug, result: res });
+      }
     });
+    if (name || pairs.length) payload.organisms.push({ name, susceptibilities: pairs });
+  });
 
-    // Organisms
-    document.querySelectorAll("#organismContainer .organism-block").forEach(block=>{
-      const orgName = block.querySelector("input").value || "";
-      const susc = [];
+  // Drug type
+  const list = DRUG_LISTS[currentMode] || [];
+  const f = list.find(x => x.value === payload.antimicrobial);
+  payload.drugType = f ? (f.type === "restricted" ? "Restricted" : "Monitored") : "";
 
-      const pairs = block.querySelectorAll(".dyn-row");
-      pairs.forEach(r=>{
-        const inputs = r.querySelectorAll("input,select");
-        if (inputs.length >= 2) {
-          const d = inputs[0].value || "";
-          const s = inputs[1].value || "";
-          if (d || s) susc.push({drug:d,result:s});
-        }
-      });
+  // Timestamp
+  payload.timestamp = new Date().toLocaleString("en-PH", { timeZone: "Asia/Manila" });
 
-      if (orgName || susc.length)
-        payload.organisms.push({ name:orgName, susceptibilities:susc });
-    });
+  return payload;
+}
 
-    return payload;
-  }
 
   // ============================
   // SUBMIT FORM
