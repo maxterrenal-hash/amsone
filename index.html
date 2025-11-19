@@ -30,6 +30,7 @@
     line-height: 1.2rem; /* tighten spacing */
     /* ↓↓↓ The important part ↓↓↓ */
     flex: 1;
+    max-height: 200px;
     overflow-y: auto;       /* scroll vertically when needed */
     padding-right: 6px;     /* avoids text touching scrollbar */
     }
@@ -43,10 +44,39 @@
     margin: 0.25rem 0;
     }
 
+    @media (min-width: 900px) {
+      #monographBox {
+        max-height: 350px;
+      }
+    }
+    
     .lab-card {
     grid-column: 1 / 3;   /* span both columns */
     }
 
+    @media (max-width: 900px) {
+    .grid-two {
+      display: grid;
+      grid-template-areas:
+        "lab"
+        "antimicrobial"
+        "monograph"
+        "indication"
+        "prevabx"
+        "micro"
+        "resident";
+    }
+
+      .lab-card { grid-area: lab; }
+      .antimicrobial-card { grid-area: antimicrobial; }
+      .monograph-card { grid-area: monograph; }
+      .indication-card { grid-area: indication; }
+      .prevabx-card { grid-area: prevabx; }
+      .micro-card { grid-area: micro; }
+      .resident-card { grid-area: resident; }
+    }
+
+    
     .app {
       max-width: 1100px;
       margin: 0 auto 3rem;
@@ -473,7 +503,7 @@
         </div>
 
         <!-- INDICATION -->
-        <div class="card">
+        <div class="card indication-card">
           <h2>Indication</h2>
 
           <div class="chips-row" id="indicationRow">
@@ -499,7 +529,7 @@
         </div>
 
         <!-- RESIDENT & DEPT -->
-        <div class="card">
+        <div class="card resident-card">
           <h2>Requesting Resident & Department</h2>
 
           <div class="field-row">
@@ -564,7 +594,7 @@
   </div>
 
   <!-- PREVIOUS ABX (MOVED HERE) -->
-  <div class="card">
+  <div class="card prevabx-card">
     <h2>Previous / Current Antibiotics</h2>
     <div id="prevAbxContainer"></div>
     <button type="button" id="addPrevAbx" class="icon-btn">➕ Add Antibiotic</button>
