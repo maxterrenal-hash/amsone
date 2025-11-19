@@ -394,6 +394,11 @@ header .title-block span {
             display:none; z-index:500;">
   Updating…
 </div>
+<!-- AI Dose Checker -->
+<div class="mini-panel" id="aiDosingCheck" style="display:none; margin-top:0.75rem;">
+  <h3>AI Dose Check</h3>
+  <div id="aiDosingText" style="white-space:pre-line;">Analyzing…</div>
+</div>
 
   <header>
     <img src="https://maxterrenal-hash.github.io/justculture/osmak-logo.png" alt="Ospital ng Makati Logo" />
@@ -689,6 +694,80 @@ header .title-block span {
   <script src="pediatric_monographs.js"></script>
 
   <script>
+
+// ===== AI Dose Advisor =====
+async function runAiDoseCheck() {
+  const drug = document.getElementById("antimicrobialSelect").value;
+  const dose = document.getElementById("dose").value;
+  const freq = document.getElementById("frequency").value;
+  const dur = document.getElementById("duration").value;
+  const age = document.getElementById("age").value;
+  const sex = document.getElementById("sex").value;
+  const weight = document.getElementById("weight").value;
+  const height = document.getElementById("height").value;
+  const scr = document.getElementById("scr").value;
+  const egfr = document.getElementById("egfrBox").textContent;
+
+  if (!drug || !dose || !freq || !dur || !scr) {
+    document.getElementById("aiDosingCheck").style.display = "none";
+    return;
+  }
+
+  // Show panel immediately
+  const box = document.getElementById("aiDosingCheck");
+  const text = document.getElementById("aiDosingText");
+  box.style.display = "block";
+  text.textContent = "Analyzing…";
+
+  const prompt = `
+You are an antimicrobial stewardship advisor.
+Patient:
+- Mode: ${currentMode}
+- Age: ${age}
+- Sex: ${sex}
+- Weight: ${weight} kg
+- Height: ${height} cm
+- Serum Creatinine: ${scr} mg/dL
+- eGFR: ${egfr}
+
+Ordered Antimicrobial:
+- Drug: ${drug}
+- Dose: ${dose}
+- Frequency: ${freq}
+- Duration: ${dur}
+
+Task:
+1. Evaluate if the dose is appropriate for this patient’s renal function, age, and weight.
+2. Give a short, direct safety recommendation (1–3 sentences).
+3. If dose seems high or low, state it clearly.
+4. Avoid any prescribing; evaluate only.
+Keep the output concise.
+`;
+
+  try {
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "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"
+      },
+      body: JSON.stringify({
+        model: "gpt-4.1-mini",
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+
+    const data = await res.json();
+    const out = data.choices?.[0]?.message?.content || "No output";
+
+    text.textContent = out.trim();
+  } catch (err) {
+    text.textContent = "AI unavailable. Check network or API key.";
+    console.error(err);
+  }
+}
+
+
     // === CONFIG ===
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxLhnpVKIpAHrNHBupOxvSH3x1FjyeeKv5g_kqq09n7YTrUqa_4nPKLRsT0HjLktq0iNg/exec"; // TODO: replace with your Apps Script URL
 
@@ -801,6 +880,25 @@ function hideUpdatingBadge() {
         const pcDose = document.getElementById("pcDose").textContent;
         if (pcDose && pcDose !== "—") {
           document.getElementById("dose").value = pcDose;
+          document.getElementById("dose").addEventListener("input", runAiDoseCheck);
+          document.getElementById("frequency").addEventListener("input", runAiDoseCheck);
+          document.getElementById("duration").addEventListener("input", runAiDoseCheck);
+          document.getElementById("scr").addEventListener("input", () => {
+            updateEgfr();
+            runAiDoseCheck();
+          });
+          document.getElementById("age").addEventListener("input", () => {
+            updateEgfr();
+            runAiDoseCheck();
+          });
+          document.getElementById("sex").addEventListener("change", () => {
+            updateEgfr();
+            runAiDoseCheck();
+          });
+          document.getElementById("weight").addEventListener("input", runAiDoseCheck);
+          document.getElementById("height").addEventListener("input", runAiDoseCheck);
+          document.getElementById("antimicrobialSelect").addEventListener("change", runAiDoseCheck);
+
         }
       });
 
