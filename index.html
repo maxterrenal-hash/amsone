@@ -824,7 +824,7 @@ function buildDrugListFromMonographs() {
           box.textContent = "Enter height to compute CKiD eGFR.";
           return;
         }
-        egfr = calcCkidApprox(age, sex, scr, height);
+        egfr = calcCkidHeightBased(height, scr);
       }
 
       if (!isFinite(egfr)) {
@@ -849,13 +849,10 @@ function buildDrugListFromMonographs() {
     }
 
     // Approximate CKiD U25 creatinine equation.
-    function calcCkidApprox(age, sex, scr, heightCm) {
-      let k = 41;
-      if (age < 5) k = 33;
-      if (sex === "male" && age >= 13) k = 38;
-      const egfr = k * (heightCm / scr);
-      return egfr;
-    }
+function calcCkidHeightBased(heightCm, scr) {
+  if (!heightCm || !scr) return NaN;
+  return 0.413 * (heightCm / scr);
+}
 
 function onDrugChange() {
   const sel = document.getElementById("antimicrobialSelect");
