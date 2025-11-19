@@ -978,36 +978,99 @@
     document.getElementById("modalBackdrop").classList.remove("show");
   }
 
-  function buildSummary() {
-    const ind = selectedIndication || "—";
-    const basis = document.getElementById("basisIndication").value || "—";
+function buildSummary() {
+  const p = collectPayload(); // reuse the same data you're about to submit
 
-    return `
-      <div><span class="summary-label">Indication:</span> ${ind}</div>
-      <div><span class="summary-label">Basis:</span> ${basis}</div>
-      <hr>
-      <div><span class="summary-label">Patient:</span>
-        ${document.getElementById("patientName").value}
-        (${document.getElementById("age").value} y,
-         ${document.getElementById("sex").value},
-         ${document.getElementById("weight").value} kg)
-      </div>
-      <div><span class="summary-label">Diagnosis:</span>
-        ${document.getElementById("diagnosis").value}
-      </div>
-      <div><span class="summary-label">Antimicrobial:</span>
-        ${document.getElementById("antimicrobialSelect").value}
-      </div>
-      <div><span class="summary-label">Dose / Freq / Dur:</span>
-        ${document.getElementById("dose").value} /
-        ${document.getElementById("frequency").value} /
-        ${document.getElementById("duration").value}
-      </div>
-      <div><span class="summary-label">eGFR:</span>
-        ${document.getElementById("egfrBox").textContent}
-      </div>
+  // Build Previous Antibiotics list
+  let prevAbxHtml = p.previousAntibiotics.length
+    ? p.previousAntibiotics.map(a =>
+        `<li>${a.drug || '—'} — ${a.frequency || '—'} — ${a.duration || '—'}</li>`
+      ).join("")
+    : "<em>No previous antibiotics listed</em>";
+
+  // Build Microbiology data
+  let microHtml = `
+    <div><span class="summary-label">Specimen:</span> ${p.specimen || "—"}</div>
+  `;
+
+  if (p.organisms.length) {
+    microHtml += `<ul>`;
+    p.organisms.forEach(org => {
+      microHtml += `
+        <li>
+          <strong>${org.name || "Unnamed Organism"}</strong>
+          <ul>
+            ${
+              org.susceptibilities.length
+                ? org.susceptibilities
+                    .map(s => `<li>${s.drug || 'Drug'} — ${s.result || 'S/I/R'}</li>`)
+                    .join("")
+                : "<li><em>No susceptibility data</em></li>"
+            }
+          </ul>
+        </li>
+      `;
+    });
+    microHtml += `</ul>`;
+  } else {
+    microHtml += `<em>No organisms listed</em>`;
+  }
+
+  // Restricted fields
+  let restrictedHtml = "";
+  if (p.drugType === "Restricted") {
+    restrictedHtml = `
+      <div><span class="summary-label">Service Resident:</span> ${p.serviceResidentName || "—"}</div>
+      <div><span class="summary-label">ID Specialist:</span> ${p.idSpecialist || "—"}</div>
     `;
   }
+
+  return `
+    <div><span class="summary-label">Indication:</span> ${p.indication}</div>
+    <div><span class="summary-label">Basis:</span> ${p.basisIndication}</div>
+    <hr>
+
+    <div><span class="summary-label">Patient:</span> ${p.patientName}</div>
+    <div><span class="summary-label">Age / Sex / Weight:</span> ${p.age} y / ${p.sex} / ${p.weightKg} kg</div>
+    ${
+      p.heightCm
+        ? `<div><span class="summary-label">Height:</span> ${p.heightCm} cm</div>`
+        : ""
+    }
+    <div><span class="summary-label">Hospital Number:</span> ${p.hospitalNumber}</div>
+    <div><span class="summary-label">Ward:</span> ${p.ward}</div>
+    <div><span class="summary-label">Diagnosis:</span> ${p.diagnosis}</div>
+    <hr>
+
+    <div><span class="summary-label">Laboratory Data:</span></div>
+    <div>Scr: ${p.scrMgDl} mg/dL</div>
+    <div>SGPT: ${p.sgpt || "—"}</div>
+    <div>eGFR: ${p.egfrText}</div>
+    <hr>
+
+    <div><span class="summary-label">Antimicrobial:</span> ${p.antimicrobial}</div>
+    <div><span class="summary-label">Drug Type:</span> ${p.drugType}</div>
+    <div><span class="summary-label">Dose:</span> ${p.dose}</div>
+    <div><span class="summary-label">Frequency:</span> ${p.frequency}</div>
+    <div><span class="summary-label">Duration:</span> ${p.duration}</div>
+    <hr>
+
+    <div><span class="summary-label">Previous Antibiotics:</span></div>
+    <ul>${prevAbxHtml}</ul>
+    <hr>
+
+    <div><span class="summary-label">Microbiology:</span></div>
+    ${microHtml}
+    <hr>
+
+    <div><span class="summary-label">Resident:</span> ${p.residentName}</div>
+    <div><span class="summary-label">Department:</span> ${p.clinicalDept}</div>
+    <div><span class="summary-label">Date:</span> ${p.reqDate}</div>
+
+    ${restrictedHtml}
+  `;
+}
+
 
   // ============================
   // PAYLOAD → SHEET
