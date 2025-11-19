@@ -8,18 +8,18 @@ const ADULT_MONOGRAPHS = {
   //            RESTRICTED ADULT
   // ======================================
 
-  "Acyclovir IV": {
-    restricted: true,
-    spectrum: "HSV-1, HSV-2, VZV; limited EBV; no CMV activity.",
-    dosing: "5–10 mg/kg IV q8h depending on severity (10 mg/kg q8h for encephalitis/severe VZV). Dose based on IBW for obesity.",
-    renal: "Adjust interval/dose when CrCl <50 mL/min; hydrate to avoid crystal nephropathy.",
-    hepatic: "No major adjustment; monitor LFTs in severe hepatic impairment.",
-    duration: "7–14 days; 14–21 days for HSV encephalitis.",
-    monitoring: "Renal function, urine output; neurotoxicity in renal impairment.",
-    warnings: "High nephrotoxicity risk if dehydrated or rapid infusion; careful with other nephrotoxins.",
-    ams: "Restricted for confirmed/suspected HSV/VZV severe disease; de-escalate when diagnosis excluded.",
-    weightBased: false
-  },
+"Acyclovir IV": {
+  restricted: true,
+  spectrum: "Active vs HSV-1, HSV-2, and VZV; no activity vs CMV.",
+  dosing: "5–12.5 mg/kg IV q8h (normal renal function). Serious HSV/VZV CNS infections typically 10–12.5 mg/kg q8h. Dose uses actual body weight unless obese—then see obesity dosing adjustments.",
+  renal: "CrCl >50: no change. CrCl 10–50: 5–12.5 mg/kg IV q12–24h. CrCl <10: 2.5–6.25 mg/kg IV q24h. Hemodialysis/CAPD/CRRT: 2.5–6.25 mg/kg IV q24h (dose after dialysis for HD). Rapid infusion increases risk of nephrotoxicity due to crystalluria.",
+  hepatic: "No required dose adjustment in mild to severe hepatic impairment (Child-Pugh A–C); data limited.",
+  duration: "Varies by syndrome: serious HSV/VZV/CNS disease usually 10–14 days; encephalitis may require extended courses per clinical guidance.",
+  monitoring: "Renal function (SCr trends), hydration status, neurotoxicity (confusion, hallucinations, delirium, seizures), urine output. Watch for phlebitis and renal crystallization.",
+  warnings: "Risk of obstructive uropathy from crystal precipitation—avoid rapid infusion and dehydration. Neurotoxicity more common with renal impairment. IV infiltration causes local tissue injury.",
+  ams: "Restricted. Use for severe HSV/VZV disease (e.g., encephalitis, disseminated disease, immunocompromised hosts). Transition to oral therapy or de-escalate when diagnosis is excluded or patient improves.",
+  weightBased: true
+},
 
   "Amikacin": {
     restricted: true,
@@ -34,57 +34,57 @@ const ADULT_MONOGRAPHS = {
     weightBased: true
   },
 
-  "Amphotericin B": {
-    restricted: true,
-    spectrum: "Very broad: most yeasts, molds; lipid formulations preferred (less nephrotoxic).",
-    dosing: "Deoxycholate 0.5–1 mg/kg/day IV; liposomal 3–5 mg/kg/day IV.",
-    renal: "Extremely nephrotoxic—monitor and prehydrate.",
-    hepatic: "Monitor LFTs; no routine adjustment.",
-    duration: "Weeks to months depending on fungal infection.",
-    monitoring: "Renal function, K/Mg, infusion reactions.",
-    warnings: "Electrolyte wasting, nephrotoxicity, infusion reactions.",
-    ams: "Reserve for severe systemic fungal infections.",
-    weightBased: true
-  },
+"Amikacin": {
+  restricted: true,
+  spectrum: "Aminoglycoside with potent Gram-negative activity; covers Enterobacterales and some non-fermenters but no longer recommended for non-urinary Pseudomonas. Active against susceptible mycobacteria (NTM).",
+  dosing: "Extended-interval: 15–20 mg/kg IV q24h for typical Gram-negative infections. Conventional: 7.5 mg/kg IV q12h. For NTM: 10–15 mg/kg IV/IM q24h (or 15–25 mg/kg 3× weekly depending on regimen).",
+  renal: "CrCl >50: usual dosing. CrCl 10–50: 7.5 mg/kg IV q24h (conventional). CrCl <10: 7.5 mg/kg IV q48h. ESRD: q48h with supplemental dose on dialysis days. For CRRT: extended-interval 25 mg/kg q48h. Requires TDM for peaks/troughs or AUC guidance.",
+  hepatic: "No dosage adjustment required across Child-Pugh A–C; hepatically safe.",
+  duration: "Typically 5–7 days for Gram-negative infections; avoid prolonged monotherapy. Duration for NTM depends on regimen and species.",
+  monitoring: "Serum drug levels (peak/trough or AUC), renal function, urine output, vestibular/cochlear function. Closely monitor for nephrotoxicity and ototoxicity. Watch for neuromuscular blockade in susceptible patients.",
+  warnings: "High risk of nephrotoxicity and ototoxicity. Avoid with other nephrotoxic/ototoxic agents (e.g., amphotericin B, cisplatin, vancomycin, colistin). Possible neuromuscular blockade. Liposome inhalation form carries pulmonary toxicity risks but not relevant to IV form.",
+  ams: "Restricted; reserve for serious Gram-negative infections or as part of NTM regimens. De-escalate as soon as cultures allow.",
+  weightBased: true
+},
 
-  "Aztreonam": {
-    restricted: true,
-    spectrum: "Gram-negative aerobes including Pseudomonas; NO Gram-positive or anaerobic activity.",
-    dosing: "1–2 g IV q6–8h (max 8 g/day).",
-    renal: "Adjust when CrCl <30 mL/min.",
-    hepatic: "Minimal adjustment.",
-    duration: "7–14 days.",
-    monitoring: "Renal function; hypersensitivity (rare).",
-    warnings: "Safe in most β-lactam allergies except ceftazidime allergy (shared side chain).",
-    ams: "Restricted for Gram-negative infection in severe β-lactam allergies.",
-    weightBased: false
-  },
+"Aztreonam": {
+  restricted: true,
+  spectrum: "Active vs Enterobacterales, Pseudomonas aeruginosa, and other Gram-negative aerobes; no activity vs Gram-positive organisms or anaerobes.",
+  dosing: "Usual adult: 2 g IV q6–8h (infused over 30 min). For resistant G-negatives per AMR guidance: 3-hour infusions may be preferred. Max 8 g/day.",
+  renal: "CrCl ≥30: no adjustment. CrCl 10–<30: reduce dose by 50%. CrCl <10: 1–2 g IV q24h. Hemodialysis: 1–2 g q24h (give dose after dialysis). CRRT: 1–2 g q12h depending on modality.",
+  hepatic: "No dosage adjustment required across Child-Pugh A–C.",
+  duration: "Varies by infection but typically 7–14 days for Gram-negative disease.",
+  monitoring: "Renal function, hypersensitivity reactions, CBC (risk of neutropenia, eosinophilia, thrombocytopenia), LFTs, and CNS effects in high doses or renal impairment.",
+  warnings: "Cross-reactivity is rare but possible with ceftazidime or cefiderocol due to identical R-1 side chain. Beware of seizures in renal impairment. GI toxicity and C. difficile possible.",
+  ams: "Restricted; preferred for Gram-negative coverage in patients with severe β-lactam allergy, except when ceftazidime side-chain allergy is present.",
+  weightBased: false
+},
 
-  "Cefepime": {
-    restricted: true,
-    spectrum: "4th-gen cephalosporin; strong Gram-negative including Pseudomonas; some Gram-positive.",
-    dosing: "1–2 g IV q8–12h; 2 g q8h for severe infections/PSA.",
-    renal: "Adjust when CrCl <60 mL/min; neurotoxicity possible.",
-    hepatic: "No major adjustment.",
-    duration: "7–14 days.",
-    monitoring: "Mental status (neurotoxicity), renal function.",
-    warnings: "Neurotoxicity in renal impairment.",
-    ams: "Restricted for PSA/high-risk GNB infections.",
-    weightBased: false
-  },
+"Cefepime": {
+  restricted: true,
+  spectrum: "Fourth-generation cephalosporin active vs MSSA, H. influenzae, Neisseria spp., and broad Gram-negative bacilli including Pseudomonas aeruginosa.",
+  dosing: "Usual: 1–2 g IV q8–12h. Severe infections/PSA: 2 g IV q8h. High-dose regimens needed for ESBL-producing GNB, but carbapenems remain preferred.",
+  renal: "Adjust when CrCl ≤60 mL/min. 30–60: 2 g q12h; 11–29: 2 g q24h; <10: 1 g q24h. Neurotoxicity risk increases with renal impairment.",
+  hepatic: "No dosage adjustment required across Child-Pugh A–C.",
+  duration: "Typically 7–14 days depending on infection.",
+  monitoring: "Renal function; mental status for neurotoxicity (confusion, myoclonus, seizures, NCSE).",
+  warnings: "Neurotoxicity risk—especially if renally impaired or underdosed adjustments. Can cause C. difficile, positive Coombs, cytopenias.",
+  ams: "Restricted for Pseudomonas, severe GNB infections, or when broad Gram-negative coverage is needed.",
+  weightBased: false
+},
 
-  "Ceftazidime–Avibactam (NF)": {
-    restricted: true,
-    spectrum: "CRE (KPC), ESBL-producing GNB, PSA; limited Gram-positive.",
-    dosing: "2.5 g IV q8h (2 hr infusion).",
-    renal: "Adjust if CrCl <50 mL/min.",
-    hepatic: "No major adjustment.",
-    duration: "7–14+ days for MDR infections.",
-    monitoring: "Renal function.",
-    warnings: "Reserve for confirmed/suspected CRE; check susceptibility.",
-    ams: "Restricted; use only for CRE or MDR organisms.",
-    weightBased: false
-  },
+"Ceftazidime–Avibactam (NF)": {
+  restricted: true,
+  spectrum: "Active vs ESBL, AmpC, and KPC-producing Enterobacterales; active vs many MDR GNB including Pseudomonas. Not active vs metallo-β-lactamases or organisms with efflux/porin resistance.",
+  dosing: "2.5 g IV q8h infused over 2 hours. Consider 3-hour infusions for AMR targets.",
+  renal: "Adjust if CrCl ≤50 mL/min: 31–50: 1.25 g q8h; 16–30: 0.94 g q12h; 6–15: 0.94 g q24h; ≤5: 0.94 g q48h. For CVVH: 1.25 g q8h; CVVHDF: 2.5 g q8h.",
+  hepatic: "No dosage adjustment across Child-Pugh A–C.",
+  duration: "Typical 7–14 days for cUTI, cIAI (with metronidazole), and HAP/VAP; may extend for MDR/CRE infections.",
+  monitoring: "Renal function; monitor for neurotoxicity (ceftazidime component).",
+  warnings: "Cross-reactivity possible with ceftazidime, aztreonam, and cefiderocol (shared R1 side chain). Reserve use for KPC/ESBL/MDR GNB; not effective vs MBL producers.",
+  ams: "Restricted; use only for documented or strongly suspected CRE (KPC+), ESBL, AmpC, or MDR Pseudomonas.",
+  weightBased: false
+},
 
   "Ceftolozane–Tazobactam (NF)": {
     restricted: true,
