@@ -775,9 +775,9 @@ function buildDrugListFromMonographs() {
 
       // Update eGFR label
       const egfrLabel = document.getElementById("egfrLabel");
-      egfrLabel.textContent = currentMode === "adult"
-        ? "Renal Function (CKD-EPI eGFR, mL/min/1.73m²)"
-        : "Renal Function (CKiD U25 eGFR, mL/min/1.73m²)";
+    egfrLabel.textContent = currentMode === "adult"
+      ? "Renal Function (CKD-EPI eGFR, mL/min/1.73m²)"
+      : "Renal Function (Bedside CKiD eGFR, mL/min/1.73m²)";
       document.getElementById("egfrBox").textContent = "—";
 
       populateDrugOptions();
