@@ -298,94 +298,97 @@ const ADULT_MONOGRAPHS = {
   //            MONITORED ADULT
   // ======================================
 
+{
+ {
   "Ceftriaxone": {
     restricted: false,
-    spectrum: "Broad Gram-negative, some Gram-positive; no PSA.",
+    spectrum: "Broad GN including Enterobacterales; some GP; no Pseudomonas.",
     dosing: "1–2 g IV q24h (up to 4 g/day for severe disease).",
-    renal: "No major adjustment unless combined hepatic + renal failure.",
-    hepatic: "Caution: biliary sludging.",
-    duration: "5–10 days typical.",
+    renal: "No adjustment unless combined renal + hepatic failure.",
+    hepatic: "Risk of biliary sludging; caution in severe impairment.",
+    duration: "Typically 5–10 days.",
     monitoring: "LFTs.",
-    warnings: "Avoid in neonates.",
+    warnings: "Avoid in neonates due to calcium-precipitation risk.",
     ams: "Monitored due to high overuse.",
     weightBased: false
   },
 
   "Ceftazidime": {
     restricted: false,
-    spectrum: "Gram-negative including PSA; weaker GP.",
-    dosing: "2 g IV q8h.",
-    renal: "Adjust if CrCl <50 mL/min.",
-    hepatic: "Minimal.",
+    spectrum: "Strong GN including Pseudomonas; weak GP; hydrolyzed by ESBL producers.",
+    dosing: "1–2 g IV q8–12h (severe infections often 2 g q8h).",
+    renal: "CrCl >50: none; 10–50: give q12–24h; <10: q24h; HD: 0.5–1 g q24h after dialysis. :contentReference[oaicite:0]{index=0}",
+    hepatic: "No dose adjustment (Child-Pugh A–C).",
     duration: "7–14 days.",
-    monitoring: "Renal, CNS toxicity.",
-    warnings: "Resistance emergence common.",
-    ams: "Monitored PSA agent.",
+    monitoring: "Renal function; CNS effects; hypersensitivity.",
+    warnings: "Shares R1 side chain with aztreonam → possible cross-reactivity. Risk of C. difficile.",
+    ams: "Monitored Pseudomonas agent; avoid as monotherapy in high ESBL-risk settings.",
     weightBased: false
   },
 
   "Ciprofloxacin": {
     restricted: false,
-    spectrum: "Strong Gram-negative including PSA; atypicals.",
-    dosing: "400 mg IV q12h OR 500–750 mg PO q12h.",
-    renal: "Adjust if CrCl <50 mL/min.",
-    hepatic: "Minimal.",
+    spectrum: "Strong GN including Pseudomonas; atypicals; limited GP.",
+    dosing: "IV 200–400 mg q8–12h; PO 500–750 mg q12h (or 400 mg IV q8h equivalent).",
+    renal: "Tablet (non-XR): CrCl 30–50 → q12h; CrCl 5–29 → q18h. Injection: CrCl 5–29 → q18–24h. :contentReference[oaicite:1]{index=1}",
+    hepatic: "No adjustment.",
     duration: "7–14 days.",
-    monitoring: "QT interval, tendons.",
-    warnings: "Tendon rupture, QT prolongation.",
-    ams: "Monitored due to collateral damage risk.",
+    monitoring: "QT interval, renal function, tendinopathy.",
+    warnings: "Tendon rupture, QT prolongation, worsening myasthenia gravis.",
+    ams: "Monitored due to resistance pressure and collateral damage.",
     weightBased: false
   },
 
   "Fluconazole": {
     restricted: false,
-    spectrum: "Candida spp. (variable), Cryptococcus.",
-    dosing: "400–800 mg IV/PO daily.",
-    renal: "Adjust when CrCl <50 mL/min.",
-    hepatic: "Monitor LFTs.",
-    duration: "Varies by indication.",
+    spectrum: "Candida spp. (not C. krusei; variable C. glabrata), Cryptococcus.",
+    dosing: "100–400 mg IV/PO q24h (higher for severe infections).",
+    renal: "CrCl ≤50: reduce to 50–200 mg q24h. HD: give full dose after dialysis. :contentReference[oaicite:2]{index=2}",
+    hepatic: "No adjustment but monitor LFTs.",
+    duration: "Depends on syndrome; candidemia ≥14 days after clearance.",
     monitoring: "LFTs, QT interval.",
-    warnings: "Drug interactions.",
+    warnings: "Alopecia at high doses, hepatotoxicity, QT prolongation, major drug interactions.",
     ams: "Monitored antifungal.",
     weightBased: false
   },
 
   "Levofloxacin": {
     restricted: false,
-    spectrum: "Respiratory FQ; Gram-negatives, GP, atypicals.",
-    dosing: "500–750 mg IV/PO daily.",
-    renal: "Adjust by CrCl.",
-    hepatic: "Minimal.",
+    spectrum: "Respiratory FQ: GN, GP, atypicals; Pseudomonas activity.",
+    dosing: "500–750 mg IV/PO q24h.",
+    renal: "CrCl 20–49: 750 mg q48h; CrCl <20: 750 mg x1 then 500 mg q48h; HD similar. :contentReference[oaicite:3]{index=3}",
+    hepatic: "No adjustment.",
     duration: "5–14 days.",
-    monitoring: "QT interval, tendons.",
-    warnings: "High QT risk.",
-    ams: "Monitored agent.",
+    monitoring: "QT interval, renal, tendons.",
+    warnings: "High QT risk; avoid with other QT agents.",
+    ams: "Monitored due to broad spectrum.",
     weightBased: false
   },
 
   "Moxifloxacin": {
     restricted: false,
-    spectrum: "Enhanced GP, anaerobes; no PSA.",
-    dosing: "400 mg IV/PO daily.",
-    renal: "No major adjustment.",
-    hepatic: "Avoid in severe hepatic disease.",
-    duration: "5–10 days typical.",
+    spectrum: "Enhanced GP and anaerobes; no Pseudomonas.",
+    dosing: "400 mg IV/PO q24h.",
+    renal: "No adjustment. :contentReference[oaicite:4]{index=4}",
+    hepatic: "Avoid in severe hepatic dysfunction.",
+    duration: "5–10 days typically.",
     monitoring: "QT interval.",
-    warnings: "QT prolongation.",
-    ams: "Monitored; avoid when PSA risk.",
+    warnings: "Significant QT prolongation risk; avoid with QT drugs.",
+    ams: "Monitored; avoid if Pseudomonas suspected.",
     weightBased: false
   },
 
   "Piperacillin–Tazobactam": {
     restricted: false,
-    spectrum: "Broad: GP, GN including PSA, anaerobes.",
-    dosing: "4.5 g IV q6–8h; extended infusion preferred.",
-    renal: "Adjust when CrCl <40 mL/min.",
-    hepatic: "Minimal adjustment.",
-    duration: "5–14 days typical.",
-    monitoring: "Renal, electrolytes.",
-    warnings: "High sodium load.",
-    ams: "Monitored broad-spectrum agent.",
+    spectrum: "Broad GN including Pseudomonas; GP; anaerobes.",
+    dosing: "Extended infusion preferred: 4.5 g IV over 4 hr q8h. Intermittent: 3.375–4.5 g q6h.",
+    renal: "Extended-infusion: CrCl <20 → q12h. Intermittent: adjust by CrCl and indication (e.g., NP vs others). :contentReference[oaicite:5]{index=5}",
+    hepatic: "No adjustment.",
+    duration: "5–14 days.",
+    monitoring: "Renal function, electrolytes (especially K+), CBC.",
+    warnings: "High sodium load; increased creatinine due to tubular secretion competition; AKI signal when combined with vancomycin.",
+    ams: "Monitored broad-spectrum; avoid for ESBL infections.",
     weightBased: false
   }
+
 };
