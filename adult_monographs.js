@@ -86,213 +86,213 @@ const ADULT_MONOGRAPHS = {
   weightBased: false
 },
 
-  "Ceftolozane–Tazobactam (NF)": {
-    restricted: true,
-    spectrum: "Highly active vs MDR Pseudomonas; good Gram-negative including ESBL; limited Gram-positive.",
-    dosing: "1.5 g IV q8h; 3 g q8h for pneumonia.",
-    renal: "Adjust if CrCl <50 mL/min.",
-    hepatic: "Minimal adjustment.",
-    duration: "7–14 days.",
-    monitoring: "Renal function.",
-    warnings: "High cost; use for documented/suspected MDR PSA.",
-    ams: "Restricted for MDR PSA.",
-    weightBased: false
-  },
+"Ceftolozane–Tazobactam (NF)": {
+  restricted: true,
+  spectrum: "Highly active vs MDR Pseudomonas aeruginosa; strong Gram-negative coverage including ESBL-producing Enterobacterales; limited Gram-positive and minimal anaerobic activity.",
+  dosing: "1.5 g IV q8h for cUTI/cIAI. For HAP/VAP: 3 g IV q8h. Infuse over 1 hr (or 3 hr per AMR guidance for severe MDR infections).",
+  renal: "Adjust if CrCl ≤50 mL/min: 30–50: 750 mg q8h; 15–29: 375 mg q8h; <15 or on HD: specialized dosing required. For HAP/VAP: use doubled doses (1.5 g → 750 mg → 450 mg equivalents).",
+  hepatic: "No dosage adjustment required across Child-Pugh A–C.",
+  duration: "cUTI 7–14 days; cIAI 5–14 days; HAP/VAP 7–14 days.",
+  monitoring: "Renal function; GI effects; hypersensitivity; neuro status if renal impairment.",
+  warnings: "Lower cure rates observed when CrCl 30–50 mL/min at initiation—likely due to early renal recovery. Adjust renal dosing cautiously in unstable renal function. Cross-reactivity low; side chains not shared with other β-lactams.",
+  ams: "Restricted for MDR Pseudomonas or ESBL infections where narrower therapy is not suitable.",
+  weightBased: false
+},
 
-  "Colistin": {
-    restricted: true,
-    spectrum: "MDR Gram-negatives: Acinetobacter, PSA, CRE (variable).",
-    dosing: "Refer to institutional colistin-base-activity protocol.",
-    renal: "High nephrotoxicity; adjust dosing.",
-    hepatic: "Minimal adjustment.",
-    duration: "Use shortest possible; 7–14+ days.",
-    monitoring: "Renal function, neurotoxicity.",
-    warnings: "Nephrotoxic, neurotoxic; combination therapy often preferred.",
-    ams: "Restricted to MDR GNB only.",
-    weightBased: false
-  },
+"Colistin": {
+  restricted: true,
+  spectrum: "Active vs MDR Gram-negative bacilli including Acinetobacter, Pseudomonas aeruginosa, and some CRE. Intrinsically inactive vs Serratia, Proteus, Providencia, Morganella, Burkholderia cepacia.",
+  dosing: "Use colistin-base-activity (CBA) dosing only. Load: 4 × body weight (mg CBA) once. Maintenance for CrCl ≥90: 180 mg CBA q12h. Adjust in renal impairment; HD/CRRT require specialized schedules.",
+  renal: "High nephrotoxicity risk. Full renal-based reduction needed: 80–170 mg q12h depending on CrCl. HD: supplemental 40–50 mg after dialysis and with next dose.",
+  hepatic: "No dosage adjustment required across Child-Pugh A–C.",
+  duration: "Use shortest feasible course; typically 7–14+ days in MDR infections.",
+  monitoring: "Renal function, cumulative dose, neuromuscular symptoms, paresthesias, mental status.",
+  warnings: "Significant nephrotoxicity and neurotoxicity (~25% nephrotoxicity risk). Avoid with other nephrotoxins (aminoglycosides, amphotericin B, vancomycin). Resistance emerges quickly; combination therapy does not reliably improve mortality.",
+  ams: "Restricted exclusively for MDR Gram-negative organisms when safer/effective options are unavailable.",
+  weightBased: true
+},
 
-  "Doripenem": {
-    restricted: true,
-    spectrum: "Broad carbapenem including PSA, GNB, GP, anaerobes.",
-    dosing: "500 mg IV q8h (1–4 hr infusion).",
-    renal: "Adjust if CrCl <50 mL/min.",
-    hepatic: "No major adjustment.",
-    duration: "7–14 days.",
-    monitoring: "Renal function; seizure risk.",
-    warnings: "Avoid in pneumonia due to worse outcomes vs comparators.",
-    ams: "Restricted carbapenem; use only when needed.",
-    weightBased: false
-  },
+"Doripenem": {
+  restricted: true,
+  spectrum: "Broad-spectrum carbapenem active vs Enterobacterales, ESBL producers, Pseudomonas aeruginosa, anaerobes, and Gram-positive cocci.",
+  dosing: "500 mg IV q8h infused over 1 hr. Extended infusions (up to 4 hr) may optimize PK/PD but do NOT exceed approved dosing.",
+  renal: "CrCl 30–50: 250 mg q8h; CrCl 10–30: 250 mg q12h; <10: insufficient data.",
+  hepatic: "Insufficient data, but no routine adjustment suggested.",
+  duration: "Generally 7–14 days depending on infection type.",
+  monitoring: "Renal function; seizure risk; interaction with valproic acid (lowers serum VPA).",
+  warnings: "Not approved for pneumonia. Associated with increased mortality and poorer cure rates in VAP vs comparators. Same class seizure risk as other carbapenems.",
+  ams: "Restricted carbapenem—reserve for cases requiring broad GNB + anaerobic coverage when meropenem/imipenem are unsuitable.",
+  weightBased: false
+},
 
-  "Ertapenem": {
-    restricted: true,
-    spectrum: "ESBL GNB, anaerobes; NO Pseudomonas or Acinetobacter.",
-    dosing: "1 g IV/IM q24h.",
-    renal: "Adjust if CrCl <30 mL/min.",
-    hepatic: "Minimal adjustment.",
-    duration: "7–14 days.",
-    monitoring: "Renal function.",
-    warnings: "Do NOT use for PSA infections.",
-    ams: "Restricted for ESBL infections without PSA risk.",
-    weightBased: false
-  },
+"Ertapenem": {
+  restricted: true,
+  spectrum: "Enterobacterales including ESBL-producers; anaerobes; good Gram-negative except NO activity vs Pseudomonas or Acinetobacter.",
+  dosing: "1 g IV/IM q24h (adult standard).",
+  renal: "CrCl ≤30 mL/min: 500 mg q24h. Hemodialysis: give dose after HD.",
+  hepatic: "No adjustment required.",
+  duration: "Typically 7–14 days depending on source.",
+  monitoring: "Renal function; CNS effects in predisposed patients.",
+  warnings: "Avoid for Pseudomonas or Acinetobacter infections; seizure risk in CNS disease or renal impairment.",
+  ams: "Restricted for ESBL infections **without** Pseudomonas risk.",
+  weightBased: false
+},
 
-  "Ganciclovir": {
-    restricted: true,
-    spectrum: "CMV, HSV, VZV.",
-    dosing: "5 mg/kg IV q12h induction; then 5 mg/kg/day maintenance.",
-    renal: "Strong renal adjustment needed.",
-    hepatic: "Monitor LFTs.",
-    duration: "Weeks to months.",
-    monitoring: "CBC (neutropenia), renal, LFTs.",
-    warnings: "Major bone marrow suppression.",
-    ams: "Restricted to CMV treatment/prophylaxis.",
-    weightBased: true
-  },
+"Gentamicin": {
+  restricted: true,
+  spectrum: "Gram-negative aerobes (E. coli, Enterobacterales); poor Pseudomonas reliability; synergistic activity vs select Gram-positive cocci.",
+  dosing: "Extended-interval: 5–7 mg/kg IV q24h (preferred). Synergy: 1 mg/kg IV q8h.",
+  renal: "Substantial renal adjustment needed; extend interval when CrCl decreases. HD: redose post-dialysis.",
+  hepatic: "No hepatic adjustment required.",
+  duration: "Typically 5–7 days; avoid prolonged courses unless needed.",
+  monitoring: "Drug levels (peak/trough or AUC), renal function, auditory/vestibular toxicity.",
+  warnings: "Nephrotoxicity and ototoxicity; neuromuscular blockade risk; avoid with other nephrotoxins.",
+  ams: "Restricted; use only for targeted Gram-negative infections or documented synergy indications.",
+  weightBased: true
+},
 
-  "Gentamicin": {
-    restricted: true,
-    spectrum: "Gram-negatives; synergy for GP.",
-    dosing: "5–7 mg/kg/day IV once daily (preferred).",
-    renal: "Adjust interval/dose; monitor levels.",
-    hepatic: "Minimal adjustment.",
-    duration: "5–7 days typically.",
-    monitoring: "Drug levels, renal, auditory.",
-    warnings: "Ototoxicity and nephrotoxicity.",
-    ams: "Restricted; use only for specific GNB or synergy.",
-    weightBased: true
-  },
+"Gentamicin": {
+  restricted: true,
+  spectrum: "Gram-negative aerobes (E. coli, Enterobacterales); poor Pseudomonas reliability; synergistic activity vs select Gram-positive cocci.",
+  dosing: "Extended-interval: 5–7 mg/kg IV q24h (preferred). Synergy: 1 mg/kg IV q8h.",
+  renal: "Substantial renal adjustment needed; extend interval when CrCl decreases. HD: redose post-dialysis.",
+  hepatic: "No hepatic adjustment required.",
+  duration: "Typically 5–7 days; avoid prolonged courses unless needed.",
+  monitoring: "Drug levels (peak/trough or AUC), renal function, auditory/vestibular toxicity.",
+  warnings: "Nephrotoxicity and ototoxicity; neuromuscular blockade risk; avoid with other nephrotoxins.",
+  ams: "Restricted; use only for targeted Gram-negative infections or documented synergy indications.",
+  weightBased: true
+},
 
-  "Imipenem": {
-    restricted: true,
-    spectrum: "Very broad: GNB, GP, anaerobes; PSA; ESBL.",
-    dosing: "500 mg IV q6h OR 1 g IV q8h depending on severity.",
-    renal: "Adjust if CrCl <70 mL/min; seizure risk increases.",
-    hepatic: "Minimal adjustment.",
-    duration: "7–14 days.",
-    monitoring: "Renal, mental status.",
-    warnings: "Highest seizure risk among carbapenems.",
-    ams: "Restricted.",
-    weightBased: false
-  },
+"Imipenem": {
+  restricted: true,
+  spectrum: "Very broad-spectrum: Enterobacterales (including ESBL), Pseudomonas, anaerobes, Gram-positive (not MRSA).",
+  dosing: "500 mg IV q6h OR 1 g IV q8h. Use prolonged infusion when treating resistant organisms.",
+  renal: "Adjust when CrCl <70 mL/min; avoid when CrCl <15 mL/min unless on dialysis.",
+  hepatic: "No adjustment required.",
+  duration: "Usually 7–14 days; longer for MDR or deep-seated infections.",
+  monitoring: "Renal function; neurologic status (seizure risk).",
+  warnings: "Highest seizure risk among carbapenems; avoid with valproic acid (interaction).",
+  ams: "Restricted broad-spectrum carbapenem; use only when narrower agents inadequate.",
+  weightBased: false
+},
 
-  "Linezolid": {
-    restricted: true,
-    spectrum: "MRSA, VRE, resistant GP.",
-    dosing: "600 mg IV/PO q12h.",
-    renal: "No adjustment.",
-    hepatic: "No adjustment; caution in severe liver disease.",
-    duration: "Typically ≤14 days to avoid toxicity.",
-    monitoring: "CBC weekly (thrombocytopenia), optic neuropathy with long use.",
-    warnings: "SSRI interaction (serotonin syndrome).",
-    ams: "Restricted for MRSA/VRE only.",
-    weightBased: false
-  },
+"Linezolid": {
+  restricted: true,
+  spectrum: "Strong activity vs MRSA, VRE (E. faecium > E. faecalis), and resistant Gram-positive cocci.",
+  dosing: "600 mg IV or PO q12h (excellent oral bioavailability; PO = IV).",
+  renal: "No adjustment required.",
+  hepatic: "No adjustment required; monitor in severe hepatic dysfunction.",
+  duration: "Try to limit to ≤14 days; prolonged use increases risk of cytopenias and neuropathy.",
+  monitoring: "Weekly CBC; monitor for optic/peripheral neuropathy with prolonged therapy; drug–drug interactions.",
+  warnings: "Risk of serotonin syndrome with SSRIs, MAOIs, TCAs, tramadol; lactic acidosis reported; thrombocytopenia common after 10–14 days.",
+  ams: "Restricted; use only for MRSA or VRE infections where alternatives are unsuitable.",
+  weightBased: false
+},
 
-  "Meropenem": {
-    restricted: true,
-    spectrum: "Very broad: ESBL, PSA, anaerobes.",
-    dosing: "1 g IV q8h or 2 g q8h for CNS infections (extended infusion preferred).",
-    renal: "Adjust if CrCl <50 mL/min.",
-    hepatic: "Minimal adjustment.",
-    duration: "7–14 days.",
-    monitoring: "Renal, mental status.",
-    warnings: "Seizures possible.",
-    ams: "Restricted carbapenem.",
-    weightBased: false
-  },
+"Meropenem": {
+  restricted: true,
+  spectrum: "Very broad: Enterobacterales including ESBL, Pseudomonas aeruginosa, anaerobes, and many Gram-positives.",
+  dosing: "1 g IV q8h for most infections. For CNS infections or high-MIC organisms: 2 g IV q8h (extended infusion preferred).",
+  renal: "Adjust when CrCl ≤50 mL/min; HD and CRRT require specific schedules.",
+  hepatic: "No adjustment required.",
+  duration: "Typically 7–14 days depending on infection.",
+  monitoring: "Renal function; mental status for seizure risk.",
+  warnings: "Seizure risk exists, particularly in renal impairment; interaction with valproic acid (↓ VPA levels).",
+  ams: "Restricted carbapenem; reserve for ESBL, AmpC, and Pseudomonas infections when narrower agents unsuitable.",
+  weightBased: false
+},
 
-  "Micafungin": {
-    restricted: true,
-    spectrum: "Candida spp., some Aspergillus activity.",
-    dosing: "100 mg IV daily (up to 150 mg for esophageal candidiasis).",
-    renal: "No adjustment.",
-    hepatic: "Monitor LFTs.",
-    duration: "≥14 days for candidemia after clearance.",
-    monitoring: "LFTs.",
-    warnings: "Hepatotoxicity.",
-    ams: "Reserved for invasive candidiasis or mold infections.",
-    weightBased: false
-  },
+"Micafungin": {
+  restricted: true,
+  spectrum: "Candida spp. (including C. glabrata, C. krusei) and some Aspergillus activity; inactive vs Cryptococcus and most molds.",
+  dosing: "Candidemia: 100 mg IV q24h. Esophageal candidiasis: 150 mg IV q24h. Prophylaxis in HSCT: 50 mg IV q24h.",
+  renal: "No dosage adjustment required—even in ESRD or dialysis.",
+  hepatic: "No dosage adjustment required across Child-Pugh A–C.",
+  duration: "Treat candidemia ≥14 days after first negative blood culture and symptom resolution.",
+  monitoring: "LFTs; monitor for hepatotoxicity and infusion reactions.",
+  warnings: "Rare but significant hepatitis; mild GI side effects; drug interactions with itraconazole, sirolimus, nifedipine.",
+  ams: "Reserved for invasive candidiasis or when azoles/other antifungals are unsuitable.",
+  weightBased: false
+},
 
-  "Polymyxin B": {
-    restricted: true,
-    spectrum: "MDR GNB including PSA, A. baumannii.",
-    dosing: "1.25–1.5 mg/kg/day divided (follow institutional protocol).",
-    renal: "Less renally cleared than colistin; still monitor Cr.",
-    hepatic: "Minimal adjustment.",
-    duration: "7–14+ days.",
-    monitoring: "Renal, neurotoxicity.",
-    warnings: "Neurotoxicity; avoid unnecessary use.",
-    ams: "Restricted.",
-    weightBased: true
-  },
+"Polymyxin B": {
+  restricted: true,
+  spectrum: "Active vs MDR Gram-negative bacilli including Pseudomonas aeruginosa, Acinetobacter baumannii, and some CRE. Intrinsically inactive vs Serratia, Proteus, Providencia, Morganella, and Burkholderia cepacia.",
+  dosing: "Loading: 2.5 mg/kg IV once (actual body weight). Maintenance: 1.5 mg/kg IV q12h. No renal adjustment needed.",
+  renal: "No dosage adjustment required, but nephrotoxicity still common—monitor closely.",
+  hepatic: "No adjustment required across Child-Pugh A–C.",
+  duration: "Usually 7–14+ days depending on infection severity and response.",
+  monitoring: "Renal function, neurotoxicity (paresthesias, ataxia), cumulative dose.",
+  warnings: "Nephrotoxicity and neurotoxicity significant; avoid with other nephrotoxins; combination therapy with carbapenem often recommended for efficacy.",
+  ams: "Restricted to MDR Gram-negative infections when no safer alternatives exist.",
+  weightBased: true
+},
 
-  "Remdesivir": {
-    restricted: true,
-    spectrum: "SARS-CoV-2.",
-    dosing: "200 mg IV once, then 100 mg IV daily x 4+ days.",
-    renal: "Avoid if eGFR <30 mL/min due to SBECD carrier.",
-    hepatic: "Avoid if ALT very high.",
-    duration: "3–10 days.",
-    monitoring: "LFTs.",
-    warnings: "Transaminitis.",
-    ams: "Restricted to COVID-19 protocols.",
-    weightBased: false
-  },
+"Remdesivir": {
+  restricted: true,
+  spectrum: "SARS-CoV-2; broad antiviral activity vs coronaviruses.",
+  dosing: "200 mg IV once, then 100 mg IV q24h. Infuse over 30–120 min.",
+  renal: "Avoid if eGFR <30 mL/min due to SBECD accumulation risk.",
+  hepatic: "Check ALT/AST before and during therapy; avoid if markedly elevated.",
+  duration: "5 days typical; up to 10 days for severe/ventilated; 3-day outpatient course for early disease.",
+  monitoring: "LFTs; watch for infusion reactions and bradycardia.",
+  warnings: "ALT/AST elevations; hypersensitivity; infusion reactions; SBECD accumulation in low eGFR.",
+  ams: "Restricted for COVID-19 cases following institutional protocols.",
+  weightBased: false
+},
 
-  "Tigecycline": {
-    restricted: true,
-    spectrum: "Broad: MRSA, VRE, anaerobes, ESBL; NOT PSA.",
-    dosing: "100 mg IV loading, then 50 mg IV q12h.",
-    renal: "No adjustment.",
-    hepatic: "Reduce maintenance dose in Child-Pugh C.",
-    duration: "7–14 days.",
-    monitoring: "LFTs, nausea/vomiting.",
-    warnings: "Higher mortality in some trials.",
-    ams: "Restricted salvage therapy.",
-    weightBased: false
-  },
+"Tigecycline": {
+  restricted: true,
+  spectrum: "Broad: MRSA, VRE, anaerobes, ESBL producers, atypicals — NO Pseudomonas.",
+  dosing: "100 mg IV loading dose, then 50 mg IV q12h.",
+  renal: "No dose adjustment.",
+  hepatic: "Reduce maintenance dose in severe hepatic impairment (Child-Pugh C).",
+  duration: "7–14 days depending on infection.",
+  monitoring: "LFTs; GI intolerance (severe nausea common).",
+  warnings: "Higher mortality signal in meta-analyses; avoid as monotherapy for severe bloodstream infections.",
+  ams: "Restricted salvage option for MDR infections lacking alternatives.",
+  weightBased: false
+},
 
-  "Valganciclovir oral": {
-    restricted: true,
-    spectrum: "CMV.",
-    dosing: "900 mg PO q12h induction; 900 mg daily maintenance (adjust by CrCl).",
-    renal: "Strong renal adjustment required.",
-    hepatic: "Monitor LFTs.",
-    duration: "Weeks to months.",
-    monitoring: "CBC, renal.",
-    warnings: "Severe neutropenia.",
-    ams: "Restricted for CMV.",
-    weightBased: false
-  },
+"Valganciclovir oral": {
+  restricted: true,
+  spectrum: "CMV; activity vs other herpesviruses but rarely used for them.",
+  dosing: "900 mg PO q12h for induction; 900 mg PO daily for maintenance/prophylaxis.",
+  renal: "Strong renal adjustment required using CrCl.",
+  hepatic: "Monitor LFTs although no formal adjustment guidelines.",
+  duration: "Weeks to months depending on indication.",
+  monitoring: "CBC (neutropenia, anemia, thrombocytopenia), renal function.",
+  warnings: "Bone marrow suppression; potential infertility; teratogenic; tablets should not be crushed.",
+  ams: "Restricted for CMV treatment or prophylaxis.",
+  weightBased: false
+},
 
-  "Vancomycin": {
-    restricted: true,
-    spectrum: "MRSA, resistant GP.",
-    dosing: "15–20 mg/kg IV q8–12h; AUC-guided dosing preferred.",
-    renal: "Adjust by CrCl and AUC levels.",
-    hepatic: "No major adjustment.",
-    duration: "Varies.",
-    monitoring: "AUC/troughs, renal function.",
-    warnings: "Red-man syndrome; nephrotoxicity.",
-    ams: "Restricted for MRSA/resistant GP only.",
-    weightBased: true
-  },
+"Vancomycin": {
+  restricted: true,
+  spectrum: "MRSA, MRSE, resistant Gram-positive cocci; oral form for C. difficile only.",
+  dosing: "15–20 mg/kg IV q8–12h (AUC-guided preferred); loading 25–30 mg/kg for severe illness.",
+  renal: "Adjust by CrCl and AUC; dialysis-specific dosing protocols apply.",
+  hepatic: "No major adjustment.",
+  duration: "Variable depending on infection site.",
+  monitoring: "AUC or troughs; renal function; auditory function with prolonged therapy.",
+  warnings: "Infusion reactions; nephrotoxicity (higher risk with piperacillin-tazobactam); ototoxicity; rare DRESS.",
+  ams: "Restricted for MRSA/resistant Gram-positive organisms only.",
+  weightBased: true
+},
 
-  "Voriconazole": {
-    restricted: true,
-    spectrum: "Aspergillus and other molds.",
-    dosing: "6 mg/kg IV q12h x 2 doses, then 4 mg/kg q12h (or 200–300 mg PO q12h).",
-    renal: "Avoid IV if CrCl <50 mL/min (SBECD carrier).",
-    hepatic: "Reduce maintenance dose in Child-Pugh A/B.",
-    duration: "Weeks to months.",
-    monitoring: "Drug levels, LFTs, vision changes.",
-    warnings: "Photosensitivity, hepatotoxicity.",
-    ams: "Restricted mold-active azole.",
-    weightBased: true
-  },
+"Voriconazole": {
+  restricted: true,
+  spectrum: "Aspergillus spp.; Candida spp. including krusei; Fusarium; Scedosporium; many molds — NOT Mucor.",
+  dosing: "6 mg/kg IV q12h × 2 doses, then 4 mg/kg IV q12h OR 200 mg PO q12h.",
+  renal: "Avoid IV if CrCl <50 mL/min (SBECD accumulation); PO is acceptable.",
+  hepatic: "Reduce maintenance dose in Child-Pugh A/B; further reduction suggested in Child-Pugh C.",
+  duration: "Weeks to months for invasive mold infections.",
+  monitoring: "Drug levels (goal 1–5.5 μg/mL), LFTs, visual changes, photosensitivity.",
+  warnings: "QT prolongation, hallucinations, hepatotoxicity, high drug-interaction burden, photosensitivity-related skin cancer risk.",
+  ams: "Restricted mold-active azole for proven/probable invasive mold disease.",
+  weightBased: true
+},
 
   // ======================================
   //            MONITORED ADULT
