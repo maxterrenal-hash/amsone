@@ -217,6 +217,19 @@
       color:var(--text-muted);
     }
 
+    .checkbox-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    }
+  
+    .checkbox-inline input[type="checkbox"] {
+    transform: scale(1.1);
+    }
+
+    
     input[type="text"], input[type="number"], select, textarea {
       border-radius:0.5rem;
       border:1px solid var(--border);
@@ -464,27 +477,36 @@
     <div class="grid-two">
 
         <!-- LAB DATA -->
-    <div class="card lab-card">
-      <h2>Laboratory Data</h2>
-    
-      <!-- FIRST ROW: Scr + SGPT + eGFR -->
-      <div class="field-row">
-        <div class="field">
-          <label>Serum Creatinine (µmol/L)</label>
-          <input type="number" id="scr" min="0" step="0.01">
-        </div>
-    
-        <div class="field">
-          <label>SGPT (optional)</label>
-          <input type="number" id="sgpt" min="0" step="1">
-        </div>
-    
-        <div class="field">
-          <label id="egfrLabel">Renal Function (eGFR)</label>
-          <div class="readonly-box" id="egfrBox">—</div>
-        </div>
-      </div>
+<div class="card lab-card">
+  <h2>Laboratory Data</h2>
+
+  <!-- FIRST ROW: Scr + SGPT + eGFR -->
+  <div class="field-row">
+    <div class="field">
+      <label>Serum Creatinine (µmol/L)</label>
+      <input type="number" id="scr" min="0" step="0.01">
     </div>
+
+    <div class="field">
+      <label>SGPT (optional)</label>
+      <input type="number" id="sgpt" min="0" step="1">
+    </div>
+
+    <div class="field">
+      <label id="egfrLabel">Renal Function (eGFR)</label>
+      <div class="readonly-box" id="egfrBox">—</div>
+    </div>
+  </div>
+
+  <!-- NEW: Creatinine not available checkbox -->
+  <div class="field-row">
+    <label class="checkbox-inline">
+      <input type="checkbox" id="scrNotAvailable">
+      Creatinine not yet available
+    </label>
+  </div>
+</div>
+
 
       <div>
         <!-- ANTIBIOTIC SELECTION -->
@@ -730,6 +752,11 @@
     document.getElementById("sex").addEventListener("change", updateEgfr);
     document.getElementById("height").addEventListener("input", updateEgfr);
 
+        // Creatinine not available toggle
+    const scrNotAvail = document.getElementById("scrNotAvailable");
+    scrNotAvail.addEventListener("change", onScrNotAvailableChange);
+
+    
     document.getElementById("antimicrobialSelect").addEventListener("change", onDrugChange);
     document.getElementById("addPrevAbx").addEventListener("click", addPrevAbxRow);
     document.getElementById("addOrganism").addEventListener("click", addOrganismBlock);
@@ -792,18 +819,48 @@
     sel.value = currentVal;
   }
 
+    function onScrNotAvailableChange() {
+    const cb  = document.getElementById("scrNotAvailable");
+    const scr = document.getElementById("scr");
+    const box = document.getElementById("egfrBox");
+
+    if (cb.checked) {
+      // Disable and clear creatinine
+      scr.value = "";
+      scr.disabled = true;
+
+      // Show pending eGFR
+      box.textContent = "Pending";
+    } else {
+      // Re-enable creatinine entry
+      scr.disabled = false;
+      // Recalculate eGFR using current inputs
+      updateEgfr();
+    }
+  }
+
+  
   // ============================
   // eGFR CALCULATIONS
   // ============================
   function updateEgfr() {
+    const scrNotAvail = document.getElementById("scrNotAvailable").checked;
+    const box = document.getElementById("egfrBox");
+
+    // If creatinine is explicitly marked as not available
+    if (scrNotAvail) {
+      box.textContent = "Pending";
+      return;
+    }
+
     let age = parseFloat(document.getElementById("age").value);
     let sex = document.getElementById("sex").value;
     let scr = parseFloat(document.getElementById("scr").value);
     let height = parseFloat(document.getElementById("height").value);
 
-    if (!isNaN(scr) && scr > 0) scr = scr / 88.4;  // mmol → mg/dL
+    // If Scr exists, convert µmol/L → mg/dL
+    if (!isNaN(scr) && scr > 0) scr = scr / 88.4;
 
-    const box = document.getElementById("egfrBox");
     if (isNaN(age) || !sex || isNaN(scr)) {
       box.textContent = "—";
       return;
@@ -822,6 +879,7 @@
 
     box.textContent = isFinite(egfr) ? egfr.toFixed(1) + " mL/min/1.73m²" : "—";
   }
+
 
   function calcCkdEpi2021(age, sex, scr) {
     const k = sex === "female" ? 0.7 : 0.9;
@@ -995,7 +1053,6 @@
       dose:"Dose",
       frequency:"Frequency",
       duration:"Duration",
-      scr:"Serum Creatinine",
       residentName:"Resident Name",
       clinicalDept:"Clinical Department",
       reqDate:"Date"
@@ -1010,6 +1067,18 @@
       }
     }
 
+    // Serum Creatinine: required ONLY if not marked as "not yet available"
+    const scrNotAvail = document.getElementById("scrNotAvailable").checked;
+    const scrEl = document.getElementById("scr");
+    if (!scrNotAvail) {
+      if (!scrEl.value.trim()) {
+        alert("Serum Creatinine is required unless marked as not yet available.");
+        scrEl.focus();
+        return false;
+      }
+    }
+
+    
     // Indication required
     if (!selectedIndication || !selectedIndication.trim()) {
       alert("Indication is required.");
@@ -1178,7 +1247,13 @@ function collectPayload() {
     hospitalNumber: document.getElementById("hospitalNumber").value || "",
     ward: document.getElementById("ward").value || "",
     diagnosis: document.getElementById("diagnosis").value || "",
-    scrMgDl: document.getElementById("scr").value || "",
+    scrMgDl: (function () {
+      const scrNotAvail = document.getElementById("scrNotAvailable").checked;
+      const scrVal = document.getElementById("scr").value || "";
+      return scrNotAvail ? "Pending" : scrVal;
+    })(),
+    sgpt: document.getElementById("sgpt").value || "",
+    egfrText: document.getElementById("egfrBox").textContent || "",
     sgpt: document.getElementById("sgpt").value || "",
     egfrText: document.getElementById("egfrBox").textContent || "",
 
