@@ -8,7 +8,6 @@ const PEDIATRIC_MONOGRAPHS = {
   //        RESTRICTED
   // ============================
 
-{
   "Acyclovir": {
     restricted: true,
     spectrum: "Active against HSV-1, HSV-2, and VZV; no CMV activity.",
