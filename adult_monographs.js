@@ -298,8 +298,7 @@ const ADULT_MONOGRAPHS = {
   //            MONITORED ADULT
   // ======================================
 
-{
- {
+
   "Ceftriaxone": {
     restricted: false,
     spectrum: "Broad GN including Enterobacterales; some GP; no Pseudomonas.",
